@@ -9,7 +9,7 @@
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f3; color: #1a1a18; min-height: 100vh; padding: 1.5rem 1rem; }
   .container { max-width: 680px; margin: 0 auto; }
   h1 { font-size: 20px; font-weight: 600; margin-bottom: 1.25rem; }
-  .tabs { display: flex; gap: 0; margin-bottom: 1.5rem; border-bottom: 1px solid #ddd; }
+  .tabs { display: flex; margin-bottom: 1.5rem; border-bottom: 1px solid #ddd; }
   .tab { padding: 8px 18px; font-size: 14px; cursor: pointer; border: none; background: none; color: #888; border-bottom: 2px solid transparent; margin-bottom: -1px; font-family: inherit; }
   .tab.active { color: #1a1a18; border-bottom: 2px solid #1a1a18; font-weight: 500; }
   .section { display: none; }
@@ -17,14 +17,18 @@
   .card { background: #fff; border: 1px solid #e8e8e4; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1rem; }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
   .field label { display: block; font-size: 12px; color: #888; margin-bottom: 4px; }
-  .field input, .field select, .field textarea { width: 100%; padding: 8px 10px; font-size: 14px; border: 1px solid #ddd; border-radius: 8px; background: #fff; color: #1a1a18; font-family: inherit; }
-  .field textarea { resize: none; height: 60px; line-height: 1.5; }
-  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: #999; }
+  .field input, .field select { width: 100%; padding: 8px 10px; font-size: 14px; border: 1px solid #ddd; border-radius: 8px; background: #fff; color: #1a1a18; font-family: inherit; }
+  .field input:focus, .field select:focus { outline: none; border-color: #999; }
   .field input:disabled { opacity: 0.5; background: #f5f5f3; }
-  .split-header { display: grid; grid-template-columns: 70px 1fr 1fr 1fr; gap: 4px; margin-bottom: 4px; }
-  .split-row { display: grid; grid-template-columns: 70px 1fr 1fr 1fr; gap: 4px; align-items: center; margin-bottom: 8px; }
-  .split-row input { text-align: right; padding: 6px 4px; font-size: 13px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; min-width: 0; }
-  .split-total { font-size: 13px; color: #888; margin-bottom: 8px; }
+  .section-label { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+  .split-hint { font-size: 11px; color: #aaa; margin-bottom: 8px; }
+  .split-grid { display: grid; grid-template-columns: 60px 1fr 1fr 1fr; gap: 4px; align-items: center; margin-bottom: 6px; }
+  .split-grid input { text-align: right; padding: 6px 4px; font-size: 13px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; width: 100%; min-width: 0; }
+  .split-grid input:focus { outline: none; border-color: #999; }
+  .name-btn { font-size: 12px; padding: 5px 4px; border: 1px solid #ddd; border-radius: 8px; background: #fff; cursor: pointer; color: #888; font-family: inherit; text-align: center; width: 100%; transition: all 0.15s; }
+  .name-btn:hover { border-color: #999; color: #1a1a18; }
+  .name-btn.active { background: #1a1a18; color: #fff; border-color: #1a1a18; font-weight: 500; }
+  .split-total { font-size: 13px; color: #888; margin-top: 6px; margin-bottom: 6px; }
   .split-total span { font-weight: 500; color: #1a1a18; }
   .err { font-size: 12px; color: #a32d2d; margin-bottom: 8px; display: none; }
   .btn { padding: 8px 16px; font-size: 13px; border: 1px solid #ccc; border-radius: 8px; background: #fff; cursor: pointer; color: #1a1a18; font-family: inherit; }
@@ -39,7 +43,7 @@
   .expense-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
   .expense-desc { font-size: 14px; font-weight: 500; }
   .expense-meta { font-size: 12px; color: #888; margin-top: 2px; }
-  .expense-notes { font-size: 12px; color: #666; margin-top: 4px; font-style: italic; }
+  .expense-notes { font-size: 12px; color: #666; margin-top: 3px; font-style: italic; }
   .expense-right { text-align: right; flex-shrink: 0; }
   .expense-amount { font-size: 15px; font-weight: 500; }
   .expense-sgd { font-size: 11px; color: #888; }
@@ -80,23 +84,20 @@
   .dot-err { background: #e24b4a; }
   .dot-loading { background: #ef9f27; animation: pulse 1s infinite; }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-  .rates-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-  .rate-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
-  .rate-label { font-size: 13px; color: #888; min-width: 80px; }
-  .rate-eq { font-size: 13px; color: #888; }
+  .rate-row { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .rate-label { font-size: 13px; color: #888; min-width: 70px; }
+  .rate-sec { font-size: 11px; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; margin-top: 14px; }
   .toast { position: fixed; bottom: 20px; right: 20px; background: #1a1a18; color: #fff; padding: 10px 16px; border-radius: 8px; font-size: 13px; opacity: 0; transition: opacity 0.2s; pointer-events: none; z-index: 999; }
   @media (max-width: 480px) {
     .form-row { grid-template-columns: 1fr; }
     .summary-grid { grid-template-columns: 1fr 1fr; }
-    .split-header, .split-row { grid-template-columns: 60px 1fr 1fr 1fr; gap: 3px; }
-    .rates-grid { grid-template-columns: 1fr; }
+    .split-grid { grid-template-columns: 55px 1fr 1fr 1fr; gap: 3px; }
   }
 </style>
 </head>
 <body>
 <div class="container">
   <h1>Group Spending Tracker</h1>
-
   <div class="tabs">
     <button class="tab active" onclick="switchTab('add',this)">Add expense</button>
     <button class="tab" onclick="switchTab('expenses',this)">Expenses</button>
@@ -114,36 +115,43 @@
     <div class="card">
       <div class="form-row">
         <div class="field"><label>Description</label><input type="text" id="desc" placeholder="e.g. Dinner at Dotonbori" /></div>
-        <div class="field"><label>Paid by</label><select id="paidBy"><option>Leonard</option><option>JS</option><option>Kyo</option></select></div>
+        <div class="field"><label>Paid by</label>
+          <select id="paidBy"><option>Leonard</option><option>JS</option><option>Kyo</option></select>
+        </div>
       </div>
       <div class="form-row">
         <div class="field"><label>Amount</label><input type="number" id="amount" placeholder="0.00" min="0" step="0.01" oninput="onAmountChange()" /></div>
-        <div class="field"><label>Currency</label><select id="currency" onchange="onAmountChange()"><option value="SGD">SGD (S$)</option><option value="JPY">JPY (¥)</option><option value="MYR">MYR (RM)</option></select></div>
+        <div class="field"><label>Currency</label>
+          <select id="currency" onchange="onAmountChange()">
+            <option value="SGD">SGD (S$)</option>
+            <option value="JPY">JPY (¥)</option>
+            <option value="MYR">MYR (RM)</option>
+          </select>
+        </div>
       </div>
       <div class="form-row">
         <div class="field"><label>Date</label><input type="date" id="date" /></div>
         <div class="field"><label>Notes <span style="font-weight:400;color:#aaa;">(optional)</span></label><input type="text" id="notes" placeholder="e.g. includes drinks" /></div>
       </div>
-      <div style="font-size:13px;font-weight:500;margin-bottom:8px;">Split</div>
-      <div class="split-header">
+
+      <div class="section-label">Split among</div>
+      <div class="split-hint">Tap names to pick who shares this bill. Tap again to deselect. No selection = split equally among all 3.</div>
+
+      <div class="split-grid" style="margin-bottom:8px;">
         <span></span>
-        <span style="font-size:12px;color:#888;text-align:center;">Leonard</span>
-        <span style="font-size:12px;color:#888;text-align:center;">JS</span>
-        <span style="font-size:12px;color:#888;text-align:center;">Kyo</span>
+        <button class="name-btn" id="nb0" onclick="toggleName(0)">Leonard</button>
+        <button class="name-btn" id="nb1" onclick="toggleName(1)">JS</button>
+        <button class="name-btn" id="nb2" onclick="toggleName(2)">Kyo</button>
       </div>
-      <div class="split-row">
-        <span style="font-size:13px;color:#888;">Amount</span>
+      <div class="split-grid">
+        <span style="font-size:12px;color:#888;">Amount</span>
         <input type="number" id="s0" placeholder="0" min="0" step="0.01" oninput="checkSplit()" />
         <input type="number" id="s1" placeholder="0" min="0" step="0.01" oninput="checkSplit()" />
         <input type="number" id="s2" placeholder="0" min="0" step="0.01" oninput="checkSplit()" />
       </div>
       <div class="split-total" id="splitTotal"></div>
       <div class="err" id="splitError"></div>
-      <div style="display:flex;gap:8px;margin-bottom:16px;">
-        <button class="btn btn-sm" onclick="splitEqual()">Split equally</button>
-        <button class="btn btn-sm" onclick="splitPayer()">Payer covers all</button>
-      </div>
-      <button class="btn btn-primary" id="addBtn" onclick="addExpense()" style="width:100%;">Add expense</button>
+      <button class="btn btn-primary" id="addBtn" onclick="addExpense()" style="width:100%;margin-top:4px;">Add expense</button>
       <div class="err" id="formError" style="margin-top:8px;"></div>
     </div>
   </div>
@@ -151,8 +159,13 @@
   <!-- EXPENSES -->
   <div id="tab-expenses" class="section">
     <div class="filter-row">
-      <select id="filterCur" onchange="renderExpenses()"><option value="ALL">All currencies</option><option value="SGD">SGD only</option><option value="JPY">JPY only</option><option value="MYR">MYR only</option></select>
-      <select id="filterPaid" onchange="renderExpenses()"><option value="ALL">All payers</option><option>Leonard</option><option>JS</option><option>Kyo</option></select>
+      <select id="filterCur" onchange="renderExpenses()">
+        <option value="ALL">All currencies</option><option value="SGD">SGD only</option>
+        <option value="JPY">JPY only</option><option value="MYR">MYR only</option>
+      </select>
+      <select id="filterPaid" onchange="renderExpenses()">
+        <option value="ALL">All payers</option><option>Leonard</option><option>JS</option><option>Kyo</option>
+      </select>
     </div>
     <div id="expenseList"></div>
   </div>
@@ -168,41 +181,30 @@
     <div id="emptyBal" class="empty" style="display:none;">No expenses yet.</div>
   </div>
 
-  <!-- SETTINGS / RATES -->
+  <!-- RATES -->
   <div id="tab-settings" class="section">
     <div class="card">
       <div style="font-size:14px;font-weight:500;margin-bottom:4px;">Exchange rates</div>
-      <div style="font-size:13px;color:#888;margin-bottom:16px;">Set how much 1 SGD buys in each currency. Balances recalculate automatically.</div>
-
-      <div style="font-size:12px;color:#888;margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">SGD → SGD</div>
+      <div style="font-size:13px;color:#888;margin-bottom:14px;">How much 1 SGD buys. Balances update automatically.</div>
+      <div class="rate-sec">SGD → SGD</div>
       <div class="rate-row">
-        <span class="rate-label">S$ 1.00</span>
-        <span class="rate-eq">=</span>
+        <span class="rate-label">S$ 1.00 =</span>
         <span style="font-size:14px;font-weight:500;">S$ 1.00</span>
-        <span style="font-size:12px;color:#aaa;margin-left:4px;">(base currency)</span>
+        <span style="font-size:12px;color:#aaa;margin-left:6px;">(base)</span>
       </div>
-
-      <div style="font-size:12px;color:#888;margin-bottom:8px;margin-top:16px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">SGD → MYR</div>
+      <div class="rate-sec">SGD → MYR</div>
       <div class="rate-row">
-        <span class="rate-label">S$ 1.00</span>
-        <span class="rate-eq">=</span>
-        <div class="field" style="max-width:120px;margin:0;">
-          <input type="number" id="rateSGDtoMYR" step="0.001" min="0.001" oninput="updateRates()" />
-        </div>
+        <span class="rate-label">S$ 1.00 =</span>
+        <div class="field" style="max-width:110px;margin:0;"><input type="number" id="rateSGDtoMYR" step="0.001" min="0.001" oninput="updateRates()" /></div>
         <span style="font-size:13px;color:#888;margin-left:6px;">RM</span>
       </div>
-
-      <div style="font-size:12px;color:#888;margin-bottom:8px;margin-top:16px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">SGD → JPY</div>
+      <div class="rate-sec">SGD → JPY</div>
       <div class="rate-row">
-        <span class="rate-label">S$ 1.00</span>
-        <span class="rate-eq">=</span>
-        <div class="field" style="max-width:120px;margin:0;">
-          <input type="number" id="rateSGDtoJPY" step="1" min="1" oninput="updateRates()" />
-        </div>
+        <span class="rate-label">S$ 1.00 =</span>
+        <div class="field" style="max-width:110px;margin:0;"><input type="number" id="rateSGDtoJPY" step="1" min="1" oninput="updateRates()" /></div>
         <span style="font-size:13px;color:#888;margin-left:6px;">¥</span>
       </div>
-
-      <div style="font-size:12px;color:#aaa;margin-top:16px;">Tip: check Google for the latest rates before your trip. Search "1 SGD to JPY".</div>
+      <div style="font-size:12px;color:#aaa;margin-top:10px;">Tip: Google "1 SGD to JPY" for the latest rate.</div>
     </div>
     <div class="card">
       <div style="font-size:14px;font-weight:500;margin-bottom:10px;">Danger zone</div>
@@ -210,255 +212,320 @@
     </div>
   </div>
 </div>
-
 <div class="toast" id="toast"></div>
 
 <script>
 const API_KEY = '$2a$10$sma/aUHTO/.TWCnQIRmgeeXg8mnr3xUzN8Ywg8TDVxvbutFTJPZ9u';
-const BASE = 'https://api.jsonbin.io/v3/b';
-const BIN_ID = '69ba84bbb7ec241ddc7c5237';
-const names = ['Leonard','JS','Kyo'];
-const avClass = ['av-l','av-j','av-k'];
+const BASE    = 'https://api.jsonbin.io/v3/b';
+const BIN_ID  = '69ba84bbb7ec241ddc7c5237';
+const names    = ['Leonard','JS','Kyo'];
+const avClass  = ['av-l','av-j','av-k'];
 const initials = ['LE','JS','KY'];
 const curSymbol = { SGD:'S$', JPY:'¥', MYR:'RM' };
-const curDp = { SGD:2, JPY:0, MYR:2 };
+const curDp     = { SGD:2, JPY:0, MYR:2 };
 
-let expenses = [];
-// rates stored as: how many units of foreign currency = 1 SGD
-// e.g. SGDtoJPY = 113 means S$1 = ¥113
-// internally we convert to SGD by dividing: amount / rate
-let rates = { SGDtoJPY: 113, SGDtoMYR: 3.33 };
-let saving = false;
+let expenses    = [];
+let rates       = { SGDtoJPY:113, SGDtoMYR:3.33 };
+let saving      = false;
+let selectedIdx = new Set(); // indices of selected names for split
 
+// ── helpers ───────────────────────────────────────────────────────
 function toSGD(amount, currency) {
-  if(currency === 'SGD') return amount;
-  if(currency === 'JPY') return amount / (rates.SGDtoJPY || 113);
-  if(currency === 'MYR') return amount / (rates.SGDtoMYR || 3.33);
+  if (currency === 'SGD') return amount;
+  if (currency === 'JPY') return amount / (rates.SGDtoJPY || 113);
+  if (currency === 'MYR') return amount / (rates.SGDtoMYR || 3.33);
   return amount;
 }
-
+function fmt(amount, currency) {
+  return curSymbol[currency] + (curDp[currency] === 0
+    ? Math.round(amount).toLocaleString()
+    : Number(amount).toFixed(curDp[currency]));
+}
 function setSync(state, msg) {
-  const dot = document.getElementById('syncDot');
-  dot.className = 'sync-dot ' + (state==='ok'?'dot-ok':state==='err'?'dot-err':'dot-loading');
+  document.getElementById('syncDot').className =
+    'sync-dot ' + (state==='ok'?'dot-ok':state==='err'?'dot-err':'dot-loading');
   document.getElementById('syncMsg').textContent = msg;
 }
-
-async function loadData() {
-  setSync('loading','Syncing...');
-  try {
-    const res = await fetch(`${BASE}/${BIN_ID}/latest`, { headers: { 'X-Master-Key': API_KEY } });
-    if(!res.ok) throw new Error('fetch failed');
-    const data = await res.json();
-    const rec = data.record;
-    expenses = rec.expenses || [];
-    if(rec.rates) {
-      const r = rec.rates;
-      // handle old format (JPY/MYR as SGD multipliers) and new format (SGDtoJPY/SGDtoMYR)
-      if(r.SGDtoJPY) { rates.SGDtoJPY = r.SGDtoJPY; } else if(r.JPY) { rates.SGDtoJPY = Math.round(1/r.JPY); }
-      if(r.SGDtoMYR) { rates.SGDtoMYR = r.SGDtoMYR; } else if(r.MYR) { rates.SGDtoMYR = parseFloat((1/r.MYR).toFixed(3)); }
-    }
-    document.getElementById('rateSGDtoJPY').value = rates.SGDtoJPY || 113;
-    document.getElementById('rateSGDtoMYR').value = rates.SGDtoMYR || 3.33;
-    setSync('ok', `Synced · ${expenses.length} expense${expenses.length!==1?'s':''}`);
-  } catch(e) { setSync('err','Sync failed — check connection'); }
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.style.opacity = '1';
+  setTimeout(() => { t.style.opacity = '0'; }, 2500);
 }
 
-async function saveData() {
-  if(saving) return;
-  saving = true;
-  setSync('loading','Saving...');
+// ── cloud ─────────────────────────────────────────────────────────
+async function loadData() {
+  setSync('loading', 'Syncing...');
   try {
-    await fetch(`${BASE}/${BIN_ID}`, {
+    const res = await fetch(BASE + '/' + BIN_ID + '/latest', {
+      headers: { 'X-Master-Key': API_KEY }
+    });
+    if (!res.ok) throw new Error('failed');
+    const rec = (await res.json()).record;
+    expenses = rec.expenses || [];
+    if (rec.rates) {
+      const r = rec.rates;
+      rates.SGDtoJPY = r.SGDtoJPY || (r.JPY ? Math.round(1/r.JPY) : 113);
+      rates.SGDtoMYR = r.SGDtoMYR || (r.MYR ? parseFloat((1/r.MYR).toFixed(3)) : 3.33);
+    }
+    document.getElementById('rateSGDtoJPY').value = rates.SGDtoJPY;
+    document.getElementById('rateSGDtoMYR').value = rates.SGDtoMYR;
+    setSync('ok', 'Synced · ' + expenses.length + ' expense' + (expenses.length!==1?'s':''));
+  } catch(e) {
+    setSync('err', 'Sync failed — check connection');
+  }
+}
+async function saveData() {
+  if (saving) return;
+  saving = true;
+  setSync('loading', 'Saving...');
+  try {
+    await fetch(BASE + '/' + BIN_ID, {
       method: 'PUT',
-      headers: { 'Content-Type':'application/json', 'X-Master-Key': API_KEY, 'X-Bin-Versioning':'false' },
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Master-Key': API_KEY,
+        'X-Bin-Versioning': 'false'
+      },
       body: JSON.stringify({ expenses, rates })
     });
-    setSync('ok',`Saved · ${expenses.length} expense${expenses.length!==1?'s':''}`);
-  } catch(e) { setSync('err','Save failed'); }
+    setSync('ok', 'Saved · ' + expenses.length + ' expense' + (expenses.length!==1?'s':''));
+  } catch(e) {
+    setSync('err', 'Save failed');
+  }
   saving = false;
 }
 
+// ── tabs ──────────────────────────────────────────────────────────
 function switchTab(t, el) {
-  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
-  document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(x => x.classList.remove('active'));
   el.classList.add('active');
   document.getElementById('tab-'+t).classList.add('active');
-  if(t==='expenses') renderExpenses();
-  if(t==='balances') renderBalances();
-  if(t==='settings') {
-    document.getElementById('rateSGDtoJPY').value = rates.SGDtoJPY || 113;
-    document.getElementById('rateSGDtoMYR').value = rates.SGDtoMYR || 3.33;
+  if (t === 'expenses') renderExpenses();
+  if (t === 'balances') renderBalances();
+  if (t === 'settings') {
+    document.getElementById('rateSGDtoJPY').value = rates.SGDtoJPY;
+    document.getElementById('rateSGDtoMYR').value = rates.SGDtoMYR;
   }
 }
 
-function fmt(amount, currency) {
-  return curSymbol[currency] + (curDp[currency]===0 ? Math.round(amount).toLocaleString() : amount.toFixed(curDp[currency]));
+// ── split logic ───────────────────────────────────────────────────
+function redistributeSplit() {
+  const amt  = parseFloat(document.getElementById('amount').value) || 0;
+  const cur  = document.getElementById('currency').value;
+  const dp   = curDp[cur];
+  // if nothing selected, split equally among all 3
+  const pool = selectedIdx.size > 0 ? selectedIdx : new Set([0,1,2]);
+  const share = amt > 0 ? amt / pool.size : 0;
+  [0,1,2].forEach(i => {
+    document.getElementById('s'+i).value = pool.has(i) ? share.toFixed(dp) : '0';
+  });
+  checkSplit();
+}
+
+function toggleName(idx) {
+  if (selectedIdx.has(idx)) {
+    selectedIdx.delete(idx);
+    document.getElementById('nb'+idx).classList.remove('active');
+  } else {
+    selectedIdx.add(idx);
+    document.getElementById('nb'+idx).classList.add('active');
+  }
+  redistributeSplit();
 }
 
 function onAmountChange() {
-  const amt = parseFloat(document.getElementById('amount').value)||0;
-  const cur = document.getElementById('currency').value;
-  [0,1,2].forEach(i=>{ document.getElementById('s'+i).value = amt>0?(amt/3).toFixed(curDp[cur]):''; });
-  checkSplit();
+  redistributeSplit();
 }
-function splitEqual() {
-  const amt = parseFloat(document.getElementById('amount').value)||0;
-  const cur = document.getElementById('currency').value;
-  [0,1,2].forEach(i=>{ document.getElementById('s'+i).value=(amt/3).toFixed(curDp[cur]); });
-  checkSplit();
-}
-function splitPayer() {
-  const payer = document.getElementById('paidBy').value;
-  const amt = parseFloat(document.getElementById('amount').value)||0;
-  const cur = document.getElementById('currency').value;
-  names.forEach((n,i)=>{ document.getElementById('s'+i).value=n===payer?amt.toFixed(curDp[cur]):'0'; });
-  checkSplit();
-}
+
 function checkSplit() {
-  const amt = parseFloat(document.getElementById('amount').value)||0;
-  const cur = document.getElementById('currency').value;
-  const splits = [0,1,2].map(i=>parseFloat(document.getElementById('s'+i).value)||0);
-  const total = splits.reduce((a,b)=>a+b,0);
-  document.getElementById('splitTotal').innerHTML='Split total: <span>'+fmt(total,cur)+'</span> of <span>'+fmt(amt,cur)+'</span>';
+  const amt    = parseFloat(document.getElementById('amount').value) || 0;
+  const cur    = document.getElementById('currency').value;
+  const splits = [0,1,2].map(i => parseFloat(document.getElementById('s'+i).value)||0);
+  const total  = splits.reduce((a,b) => a+b, 0);
+  document.getElementById('splitTotal').innerHTML =
+    'Split total: <span>' + fmt(total,cur) + '</span> of <span>' + fmt(amt,cur) + '</span>';
   const err = document.getElementById('splitError');
-  if(amt>0&&Math.abs(total-amt)>0.05){err.style.display='block';err.textContent='Split must equal total.';}
-  else err.style.display='none';
+  if (amt > 0 && Math.abs(total-amt) > 0.05) {
+    err.style.display = 'block'; err.textContent = 'Split must equal total.';
+  } else {
+    err.style.display = 'none';
+  }
 }
 
+function resetForm() {
+  document.getElementById('desc').value   = '';
+  document.getElementById('amount').value = '';
+  document.getElementById('notes').value  = '';
+  document.getElementById('splitTotal').innerHTML = '';
+  document.getElementById('splitError').style.display = 'none';
+  document.getElementById('formError').style.display  = 'none';
+  [0,1,2].forEach(i => {
+    document.getElementById('s'+i).value = '';
+    document.getElementById('nb'+i).classList.remove('active');
+  });
+  selectedIdx.clear();
+  document.getElementById('date').value = new Date().toISOString().slice(0,10);
+}
+
+// ── add ───────────────────────────────────────────────────────────
 async function addExpense() {
-  const desc = document.getElementById('desc').value.trim();
-  const paidBy = document.getElementById('paidBy').value;
-  const amount = parseFloat(document.getElementById('amount').value);
+  const desc     = document.getElementById('desc').value.trim();
+  const paidBy   = document.getElementById('paidBy').value;
+  const amount   = parseFloat(document.getElementById('amount').value);
   const currency = document.getElementById('currency').value;
-  const date = document.getElementById('date').value;
-  const notes = document.getElementById('notes').value.trim();
-  const splits = [0,1,2].map(i=>parseFloat(document.getElementById('s'+i).value)||0);
-  const total = splits.reduce((a,b)=>a+b,0);
-  const err = document.getElementById('formError');
-  if(!desc){err.style.display='block';err.textContent='Please enter a description.';return;}
-  if(!amount||amount<=0){err.style.display='block';err.textContent='Please enter a valid amount.';return;}
-  if(Math.abs(total-amount)>0.05){err.style.display='block';err.textContent='Split amounts must add up to total.';return;}
-  err.style.display='none';
+  const date     = document.getElementById('date').value;
+  const notes    = document.getElementById('notes').value.trim();
+  const splits   = [0,1,2].map(i => parseFloat(document.getElementById('s'+i).value)||0);
+  const total    = splits.reduce((a,b) => a+b, 0);
+  const err      = document.getElementById('formError');
+
+  if (!desc)              { err.style.display='block'; err.textContent='Please enter a description.'; return; }
+  if (!amount||amount<=0) { err.style.display='block'; err.textContent='Please enter a valid amount.'; return; }
+  if (Math.abs(total-amount)>0.05) { err.style.display='block'; err.textContent='Split amounts must add up to total.'; return; }
+  err.style.display = 'none';
+
   const btn = document.getElementById('addBtn');
-  btn.disabled=true; btn.textContent='Saving...';
-  expenses.push({ id:Date.now(), desc, paidBy, amount, currency, date:date||new Date().toISOString().slice(0,10), notes, splits });
+  btn.disabled = true; btn.textContent = 'Saving...';
+  expenses.push({ id:Date.now(), desc, paidBy, amount, currency,
+    date: date || new Date().toISOString().slice(0,10), notes, splits });
   await saveData();
-  document.getElementById('desc').value='';
-  document.getElementById('amount').value='';
-  document.getElementById('notes').value='';
-  [0,1,2].forEach(i=>{ document.getElementById('s'+i).value=''; });
-  document.getElementById('splitTotal').innerHTML='';
-  btn.disabled=false; btn.textContent='Add expense';
-  toast('Expense saved to cloud!');
+  resetForm();
+  btn.disabled = false; btn.textContent = 'Add expense';
+  toast('Expense saved!');
 }
 
+// ── delete ────────────────────────────────────────────────────────
 async function deleteExpense(id) {
-  if(!confirm('Delete this expense?')) return;
-  expenses = expenses.filter(e=>e.id!==id);
+  if (!confirm('Delete this expense?')) return;
+  expenses = expenses.filter(e => e.id !== id);
   await saveData();
   renderExpenses();
   toast('Expense deleted.');
 }
 
+// ── expenses list ─────────────────────────────────────────────────
 function renderExpenses() {
   const fc = document.getElementById('filterCur').value;
   const fp = document.getElementById('filterPaid').value;
   let list = expenses.slice().reverse();
-  if(fc!=='ALL') list=list.filter(e=>e.currency===fc);
-  if(fp!=='ALL') list=list.filter(e=>e.paidBy===fp);
+  if (fc !== 'ALL') list = list.filter(e => e.currency === fc);
+  if (fp !== 'ALL') list = list.filter(e => e.paidBy === fp);
   const el = document.getElementById('expenseList');
-  if(!list.length){el.innerHTML='<div class="empty">No expenses match your filter.</div>';return;}
-  el.innerHTML=list.map(e=>{
-    const sgdEq=toSGD(e.amount,e.currency);
-    const pills=names.map((n,i)=>`<span class="split-pill">${n}: ${fmt(e.splits[i],e.currency)}</span>`).join('');
-    const notesHtml = e.notes ? `<div class="expense-notes">${e.notes}</div>` : '';
-    return `<div class="expense-item">
-      <div class="expense-top">
-        <div>
-          <div class="expense-desc">${e.desc}</div>
-          <div class="expense-meta">${e.date} · Paid by <strong>${e.paidBy}</strong></div>
-          ${notesHtml}
-        </div>
-        <div class="expense-right">
-          <div class="expense-amount">${fmt(e.amount,e.currency)}<span class="badge b-${e.currency.toLowerCase()}">${e.currency}</span></div>
-          ${e.currency!=='SGD'?`<div class="expense-sgd">≈ S$${sgdEq.toFixed(2)}</div>`:''}
-        </div>
-      </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;">
-        <div class="expense-splits">${pills}</div>
-        <button class="btn btn-sm btn-del" onclick="deleteExpense(${e.id})">Delete</button>
-      </div>
-    </div>`;
+  if (!list.length) { el.innerHTML = '<div class="empty">No expenses match your filter.</div>'; return; }
+  el.innerHTML = list.map(e => {
+    const sgdEq = toSGD(e.amount, e.currency);
+    const pills = names.map((n,i) =>
+      '<span class="split-pill">' + n + ': ' + fmt(e.splits[i], e.currency) + '</span>').join('');
+    const notesHtml = e.notes ? '<div class="expense-notes">' + e.notes + '</div>' : '';
+    return '<div class="expense-item">' +
+      '<div class="expense-top">' +
+        '<div>' +
+          '<div class="expense-desc">' + e.desc + '</div>' +
+          '<div class="expense-meta">' + e.date + ' · Paid by <strong>' + e.paidBy + '</strong></div>' +
+          notesHtml +
+        '</div>' +
+        '<div class="expense-right">' +
+          '<div class="expense-amount">' + fmt(e.amount,e.currency) +
+            '<span class="badge b-' + e.currency.toLowerCase() + '">' + e.currency + '</span></div>' +
+          (e.currency!=='SGD' ? '<div class="expense-sgd">≈ S$' + sgdEq.toFixed(2) + '</div>' : '') +
+        '</div>' +
+      '</div>' +
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;">' +
+        '<div class="expense-splits">' + pills + '</div>' +
+        '<button class="btn btn-sm btn-del" onclick="deleteExpense(' + e.id + ')">Delete</button>' +
+      '</div>' +
+    '</div>';
   }).join('');
 }
 
+// ── balances ──────────────────────────────────────────────────────
 function renderBalances() {
-  const empty=document.getElementById('emptyBal');
-  if(!expenses.length){document.getElementById('summaryGrid').innerHTML='';document.getElementById('balanceCards').innerHTML='';empty.style.display='block';document.getElementById('settleSection').style.display='none';return;}
-  empty.style.display='none';
-  const totalSGD=expenses.reduce((s,e)=>s+toSGD(e.amount,e.currency),0);
-  const usedCurs=[...new Set(expenses.map(e=>e.currency))];
-  document.getElementById('summaryGrid').innerHTML=`
-    <div class="metric"><div class="metric-label">Total (SGD)</div><div class="metric-value">S$${totalSGD.toFixed(2)}</div><div class="metric-sub">${expenses.length} expense${expenses.length!==1?'s':''}</div></div>
-    <div class="metric"><div class="metric-label">Per person</div><div class="metric-value">S$${(totalSGD/3).toFixed(2)}</div><div class="metric-sub">equal share</div></div>
-    <div class="metric"><div class="metric-label">Currencies</div><div class="metric-value" style="font-size:14px;padding-top:4px;">${usedCurs.map(c=>`<span class="badge b-${c.toLowerCase()}">${c}</span>`).join(' ')}</div></div>`;
-  const paid={}; const owed={}; const paidByCur={}; const owedByCur={};
-  names.forEach(n=>{paid[n]=0;owed[n]=0;paidByCur[n]={};owedByCur[n]={};});
-  expenses.forEach(e=>{
-    paid[e.paidBy]+=toSGD(e.amount,e.currency);
-    paidByCur[e.paidBy][e.currency]=(paidByCur[e.paidBy][e.currency]||0)+e.amount;
-    names.forEach((n,i)=>{owed[n]+=toSGD(e.splits[i],e.currency);owedByCur[n][e.currency]=(owedByCur[n][e.currency]||0)+e.splits[i];});
-  });
-  const net={}; names.forEach(n=>{net[n]=paid[n]-owed[n];});
-  document.getElementById('balanceCards').innerHTML=names.map((n,idx)=>{
-    const nv=net[n]; const nc=nv>0.01?'pos':nv<-0.01?'neg':'zero';
-    const nl=nv>0.01?`gets back S$${Math.abs(nv).toFixed(2)}`:nv<-0.01?`owes S$${Math.abs(nv).toFixed(2)}`:'settled up';
-    const curRows=usedCurs.map(c=>{
-      const p=paidByCur[n][c]||0; const o=owedByCur[n][c]||0; const cv=p-o;
-      if(p===0&&o===0) return '';
-      return `<div class="cur-detail-row"><span>${c}: paid ${fmt(p,c)}, share ${fmt(o,c)}</span><span class="${cv>0.01?'pos':cv<-0.01?'neg':'zero'}">${cv>=0?'+':''}${fmt(cv,c)}</span></div>`;
-    }).join('');
-    return `<div class="person-card">
-      <div class="person-header"><div class="avatar ${avClass[idx]}">${initials[idx]}</div><div><div class="person-name">${n}</div><div class="person-net ${nc}">${nl}</div></div></div>
-      <div class="bal-row"><span class="bal-label">Total paid (SGD)</span><span>S$${paid[n].toFixed(2)}</span></div>
-      <div class="bal-row"><span class="bal-label">Total share (SGD)</span><span>S$${owed[n].toFixed(2)}</span></div>
-      <div class="bal-row" style="font-weight:500"><span class="bal-label">Net</span><span class="${nc}">${nv>=0?'+':''}S$${nv.toFixed(2)}</span></div>
-      ${curRows?`<div class="cur-section"><div class="cur-section-title">By currency</div>${curRows}</div>`:''}
-    </div>`;
-  }).join('');
-  const bal={...net}; const debts=[];
-  const dList=names.filter(n=>bal[n]<-0.01).map(n=>({name:n,amt:-bal[n]}));
-  const cList=names.filter(n=>bal[n]>0.01).map(n=>({name:n,amt:bal[n]}));
-  let di=0,ci=0;
-  while(di<dList.length&&ci<cList.length){
-    const pay=Math.min(dList[di].amt,cList[ci].amt);
-    if(pay>0.01) debts.push({from:dList[di].name,to:cList[ci].name,amt:pay});
-    dList[di].amt-=pay; cList[ci].amt-=pay;
-    if(dList[di].amt<0.01)di++; if(cList[ci].amt<0.01)ci++;
+  const empty = document.getElementById('emptyBal');
+  if (!expenses.length) {
+    document.getElementById('summaryGrid').innerHTML = '';
+    document.getElementById('balanceCards').innerHTML = '';
+    empty.style.display = 'block';
+    document.getElementById('settleSection').style.display = 'none';
+    return;
   }
-  const ss=document.getElementById('settleSection');
-  if(debts.length){ss.style.display='block';document.getElementById('settleItems').innerHTML=debts.map(d=>`<div class="settle-item"><span><strong>${d.from}</strong><span class="settle-arrow">→</span><strong>${d.to}</strong></span><span style="font-weight:500">S$${d.amt.toFixed(2)}</span></div>`).join('');}
-  else ss.style.display='none';
+  empty.style.display = 'none';
+  const totalSGD = expenses.reduce((s,e) => s + toSGD(e.amount,e.currency), 0);
+  const usedCurs = [...new Set(expenses.map(e => e.currency))];
+
+  document.getElementById('summaryGrid').innerHTML =
+    '<div class="metric"><div class="metric-label">Total (SGD)</div><div class="metric-value">S$' + totalSGD.toFixed(2) + '</div><div class="metric-sub">' + expenses.length + ' expense' + (expenses.length!==1?'s':'') + '</div></div>' +
+    '<div class="metric"><div class="metric-label">Per person</div><div class="metric-value">S$' + (totalSGD/3).toFixed(2) + '</div><div class="metric-sub">equal share</div></div>' +
+    '<div class="metric"><div class="metric-label">Currencies</div><div class="metric-value" style="font-size:14px;padding-top:4px;">' + usedCurs.map(c=>'<span class="badge b-'+c.toLowerCase()+'">'+c+'</span>').join(' ') + '</div></div>';
+
+  const paid={}, owed={}, paidByCur={}, owedByCur={};
+  names.forEach(n => { paid[n]=0; owed[n]=0; paidByCur[n]={}; owedByCur[n]={}; });
+  expenses.forEach(e => {
+    paid[e.paidBy] += toSGD(e.amount, e.currency);
+    paidByCur[e.paidBy][e.currency] = (paidByCur[e.paidBy][e.currency]||0) + e.amount;
+    names.forEach((n,i) => {
+      owed[n] += toSGD(e.splits[i], e.currency);
+      owedByCur[n][e.currency] = (owedByCur[n][e.currency]||0) + e.splits[i];
+    });
+  });
+  const net = {}; names.forEach(n => { net[n] = paid[n] - owed[n]; });
+
+  document.getElementById('balanceCards').innerHTML = names.map((n,idx) => {
+    const nv = net[n];
+    const nc = nv>0.01?'pos':nv<-0.01?'neg':'zero';
+    const nl = nv>0.01 ? 'gets back S$'+Math.abs(nv).toFixed(2)
+             : nv<-0.01 ? 'owes S$'+Math.abs(nv).toFixed(2) : 'settled up';
+    const curRows = usedCurs.map(c => {
+      const p=paidByCur[n][c]||0, o=owedByCur[n][c]||0, cv=p-o;
+      if (p===0&&o===0) return '';
+      return '<div class="cur-detail-row"><span>'+c+': paid '+fmt(p,c)+', share '+fmt(o,c)+'</span>' +
+        '<span class="'+(cv>0.01?'pos':cv<-0.01?'neg':'zero')+'">'+(cv>=0?'+':'')+fmt(cv,c)+'</span></div>';
+    }).join('');
+    return '<div class="person-card">' +
+      '<div class="person-header">' +
+        '<div class="avatar '+avClass[idx]+'">'+initials[idx]+'</div>' +
+        '<div><div class="person-name">'+n+'</div><div class="person-net '+nc+'">'+nl+'</div></div>' +
+      '</div>' +
+      '<div class="bal-row"><span class="bal-label">Total paid (SGD)</span><span>S$'+paid[n].toFixed(2)+'</span></div>' +
+      '<div class="bal-row"><span class="bal-label">Total share (SGD)</span><span>S$'+owed[n].toFixed(2)+'</span></div>' +
+      '<div class="bal-row" style="font-weight:500"><span class="bal-label">Net</span><span class="'+nc+'">'+(nv>=0?'+':'')+'S$'+nv.toFixed(2)+'</span></div>' +
+      (curRows ? '<div class="cur-section"><div class="cur-section-title">By currency</div>'+curRows+'</div>' : '') +
+    '</div>';
+  }).join('');
+
+  const bal={...net}, debts=[];
+  const dList=names.filter(n=>bal[n]<-0.01).map(n=>({name:n,amt:-bal[n]}));
+  const cList=names.filter(n=>bal[n]> 0.01).map(n=>({name:n,amt: bal[n]}));
+  let di=0, ci=0;
+  while (di<dList.length && ci<cList.length) {
+    const pay = Math.min(dList[di].amt, cList[ci].amt);
+    if (pay>0.01) debts.push({from:dList[di].name, to:cList[ci].name, amt:pay});
+    dList[di].amt-=pay; cList[ci].amt-=pay;
+    if (dList[di].amt<0.01) di++;
+    if (cList[ci].amt<0.01) ci++;
+  }
+  const ss = document.getElementById('settleSection');
+  if (debts.length) {
+    ss.style.display = 'block';
+    document.getElementById('settleItems').innerHTML = debts.map(d =>
+      '<div class="settle-item"><span><strong>'+d.from+'</strong><span class="settle-arrow">→</span><strong>'+d.to+'</strong></span><span style="font-weight:500">S$'+d.amt.toFixed(2)+'</span></div>'
+    ).join('');
+  } else { ss.style.display = 'none'; }
 }
 
+// ── rates ─────────────────────────────────────────────────────────
 async function updateRates() {
   rates.SGDtoJPY = parseFloat(document.getElementById('rateSGDtoJPY').value) || 113;
   rates.SGDtoMYR = parseFloat(document.getElementById('rateSGDtoMYR').value) || 3.33;
   await saveData();
 }
-
 async function clearAll() {
-  if(!confirm('Delete ALL expenses? This cannot be undone.')) return;
-  expenses=[]; await saveData(); renderExpenses(); toast('All expenses cleared.');
+  if (!confirm('Delete ALL expenses? This cannot be undone.')) return;
+  expenses = []; await saveData(); renderExpenses(); toast('All expenses cleared.');
 }
 
-function toast(msg) {
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.style.opacity='1';
-  setTimeout(()=>{t.style.opacity='0';},2500);
-}
-
-document.getElementById('date').value = new Date().toISOString().slice(0,10);
+// ── init ──────────────────────────────────────────────────────────
+document.getElementById('date').value         = new Date().toISOString().slice(0,10);
 document.getElementById('rateSGDtoJPY').value = rates.SGDtoJPY;
 document.getElementById('rateSGDtoMYR').value = rates.SGDtoMYR;
 loadData();
