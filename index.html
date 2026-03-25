@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -87,6 +88,14 @@
   .rate-row { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
   .rate-label { font-size: 13px; color: #888; min-width: 70px; }
   .rate-sec { font-size: 11px; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; margin-top: 14px; }
+  .note-item { background: #fff; border: 1px solid #e8e8e4; border-radius: 10px; padding: 10px 14px; margin-bottom: 8px; }
+  .note-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+  .note-tag { display: inline-block; padding: 2px 8px; border-radius: 99px; font-size: 11px; font-weight: 500; margin-bottom: 4px; }
+  .tag-exchange { background: #e6f1fb; color: #185fa5; }
+  .tag-reminder { background: #faeeda; color: #854f0b; }
+  .tag-general  { background: #f5f5f3; color: #666; }
+  .note-date { font-size: 12px; color: #888; }
+  .note-text { font-size: 13px; color: #1a1a18; margin-top: 4px; line-height: 1.5; }
   .toast { position: fixed; bottom: 20px; right: 20px; background: #1a1a18; color: #fff; padding: 10px 16px; border-radius: 8px; font-size: 13px; opacity: 0; transition: opacity 0.2s; pointer-events: none; z-index: 999; }
   @media (max-width: 480px) {
     .form-row { grid-template-columns: 1fr; }
@@ -102,10 +111,12 @@
     <button class="tab active" onclick="switchTab('add',this)">Add expense</button>
     <button class="tab" onclick="switchTab('expenses',this)">Expenses</button>
     <button class="tab" onclick="switchTab('balances',this)">Balances</button>
+    <button class="tab" onclick="switchTab('notes',this)">Notes</button>
     <button class="tab" onclick="switchTab('settings',this)">Rates</button>
   </div>
 
   <!-- ADD -->
+
   <div id="tab-add" class="section active">
     <div class="sync-bar">
       <div class="sync-dot dot-loading" id="syncDot"></div>
@@ -134,29 +145,33 @@
         <div class="field"><label>Notes <span style="font-weight:400;color:#aaa;">(optional)</span></label><input type="text" id="notes" placeholder="e.g. includes drinks" /></div>
       </div>
 
-      <div class="section-label">Split among</div>
-      <div class="split-hint">Tap names to pick who shares this bill. Tap again to deselect. No selection = split equally among all 3.</div>
+```
+  <div class="section-label">Split among</div>
+  <div class="split-hint">Tap names to pick who shares this bill. Tap again to deselect. No selection = split equally among all 3.</div>
 
-      <div class="split-grid" style="margin-bottom:8px;">
-        <span></span>
-        <button class="name-btn" id="nb0" onclick="toggleName(0)">Leonard</button>
-        <button class="name-btn" id="nb1" onclick="toggleName(1)">JS</button>
-        <button class="name-btn" id="nb2" onclick="toggleName(2)">Kyo</button>
-      </div>
-      <div class="split-grid">
-        <span style="font-size:12px;color:#888;">Amount</span>
-        <input type="number" id="s0" placeholder="0" min="0" step="0.01" oninput="checkSplit()" />
-        <input type="number" id="s1" placeholder="0" min="0" step="0.01" oninput="checkSplit()" />
-        <input type="number" id="s2" placeholder="0" min="0" step="0.01" oninput="checkSplit()" />
-      </div>
-      <div class="split-total" id="splitTotal"></div>
-      <div class="err" id="splitError"></div>
-      <button class="btn btn-primary" id="addBtn" onclick="addExpense()" style="width:100%;margin-top:4px;">Add expense</button>
-      <div class="err" id="formError" style="margin-top:8px;"></div>
-    </div>
+  <div class="split-grid" style="margin-bottom:8px;">
+    <span></span>
+    <button class="name-btn" id="nb0" onclick="toggleName(0)">Leonard</button>
+    <button class="name-btn" id="nb1" onclick="toggleName(1)">JS</button>
+    <button class="name-btn" id="nb2" onclick="toggleName(2)">Kyo</button>
+  </div>
+  <div class="split-grid">
+    <span style="font-size:12px;color:#888;">Amount</span>
+    <input type="number" id="s0" placeholder="0" min="0" step="0.01" oninput="checkSplit()" />
+    <input type="number" id="s1" placeholder="0" min="0" step="0.01" oninput="checkSplit()" />
+    <input type="number" id="s2" placeholder="0" min="0" step="0.01" oninput="checkSplit()" />
+  </div>
+  <div class="split-total" id="splitTotal"></div>
+  <div class="err" id="splitError"></div>
+  <button class="btn btn-primary" id="addBtn" onclick="addExpense()" style="width:100%;margin-top:4px;">Add expense</button>
+  <div class="err" id="formError" style="margin-top:8px;"></div>
+</div>
+```
+
   </div>
 
   <!-- EXPENSES -->
+
   <div id="tab-expenses" class="section">
     <div class="filter-row">
       <select id="filterCur" onchange="renderExpenses()">
@@ -171,6 +186,7 @@
   </div>
 
   <!-- BALANCES -->
+
   <div id="tab-balances" class="section">
     <div class="summary-grid" id="summaryGrid"></div>
     <div id="balanceCards"></div>
@@ -181,7 +197,33 @@
     <div id="emptyBal" class="empty" style="display:none;">No expenses yet.</div>
   </div>
 
+  <!-- NOTES -->
+
+  <div id="tab-notes" class="section">
+    <div class="card">
+      <div class="form-row">
+        <div class="field"><label>Date</label><input type="date" id="noteDate" /></div>
+        <div class="field"><label>Tag</label>
+          <select id="noteTag">
+            <option value="Exchange">Exchange</option>
+            <option value="Reminder">Reminder</option>
+            <option value="General">General</option>
+          </select>
+        </div>
+      </div>
+      <div class="field" style="margin-bottom:12px;">
+        <label>Note</label>
+        <textarea id="noteText" placeholder="e.g. Exchanged ¥70,000 · S$1 = ¥112.5 at Takashimaya" style="width:100%;padding:8px 10px;font-size:14px;border:1px solid #ddd;border-radius:8px;font-family:inherit;resize:none;height:80px;line-height:1.5;"></textarea>
+      </div>
+      <button class="btn btn-primary" id="addNoteBtn" onclick="addNote()" style="width:100%;">Add note</button>
+      <div class="err" id="noteError" style="margin-top:8px;"></div>
+    </div>
+    <div id="noteList"></div>
+    <div id="emptyNotes" class="empty" style="display:none;">No notes yet.</div>
+  </div>
+
   <!-- RATES -->
+
   <div id="tab-settings" class="section">
     <div class="card">
       <div style="font-size:14px;font-weight:500;margin-bottom:4px;">Exchange rates</div>
@@ -225,6 +267,7 @@ const curSymbol = { SGD:'S$', JPY:'¥', MYR:'RM' };
 const curDp     = { SGD:2, JPY:0, MYR:2 };
 
 let expenses    = [];
+let tripNotes   = [];
 let rates       = { SGDtoJPY:113, SGDtoMYR:3.33 };
 let saving      = false;
 let selectedIdx = new Set(); // indices of selected names for split
@@ -261,7 +304,8 @@ async function loadData() {
     });
     if (!res.ok) throw new Error('failed');
     const rec = (await res.json()).record;
-    expenses = rec.expenses || [];
+    expenses  = rec.expenses  || [];
+    tripNotes = rec.tripNotes || [];
     if (rec.rates) {
       const r = rec.rates;
       rates.SGDtoJPY = r.SGDtoJPY || (r.JPY ? Math.round(1/r.JPY) : 113);
@@ -286,7 +330,7 @@ async function saveData() {
         'X-Master-Key': API_KEY,
         'X-Bin-Versioning': 'false'
       },
-      body: JSON.stringify({ expenses, rates })
+      body: JSON.stringify({ expenses, rates, tripNotes })
     });
     setSync('ok', 'Saved · ' + expenses.length + ' expense' + (expenses.length!==1?'s':''));
   } catch(e) {
@@ -303,6 +347,7 @@ function switchTab(t, el) {
   document.getElementById('tab-'+t).classList.add('active');
   if (t === 'expenses') renderExpenses();
   if (t === 'balances') renderBalances();
+  if (t === 'notes') renderNotes();
   if (t === 'settings') {
     document.getElementById('rateSGDtoJPY').value = rates.SGDtoJPY;
     document.getElementById('rateSGDtoMYR').value = rates.SGDtoMYR;
@@ -513,6 +558,53 @@ function renderBalances() {
   } else { ss.style.display = 'none'; }
 }
 
+// ── notes ─────────────────────────────────────────────────────────
+async function addNote() {
+  const text = document.getElementById('noteText').value.trim();
+  const tag  = document.getElementById('noteTag').value;
+  const date = document.getElementById('noteDate').value;
+  const err  = document.getElementById('noteError');
+  if (!text) { err.style.display='block'; err.textContent='Please enter a note.'; return; }
+  err.style.display = 'none';
+  const btn = document.getElementById('addNoteBtn');
+  btn.disabled = true; btn.textContent = 'Saving...';
+  tripNotes.push({ id:Date.now(), date: date || new Date().toISOString().slice(0,10), tag, text });
+  await saveData();
+  document.getElementById('noteText').value = '';
+  document.getElementById('noteDate').value = new Date().toISOString().slice(0,10);
+  btn.disabled = false; btn.textContent = 'Add note';
+  renderNotes();
+  toast('Note saved!');
+}
+
+async function deleteNote(id) {
+  if (!confirm('Delete this note?')) return;
+  tripNotes = tripNotes.filter(n => n.id !== id);
+  await saveData();
+  renderNotes();
+  toast('Note deleted.');
+}
+
+function renderNotes() {
+  const el    = document.getElementById('noteList');
+  const empty = document.getElementById('emptyNotes');
+  if (!tripNotes.length) { el.innerHTML = ''; empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+  const tagClass = { Exchange:'tag-exchange', Reminder:'tag-reminder', General:'tag-general' };
+  el.innerHTML = tripNotes.slice().reverse().map(n =>
+    '<div class="note-item">' +
+      '<div class="note-header">' +
+        '<div>' +
+          '<span class="note-tag ' + (tagClass[n.tag]||'tag-general') + '">' + n.tag + '</span>' +
+          '<div class="note-date">' + n.date + '</div>' +
+          '<div class="note-text">' + n.text + '</div>' +
+        '</div>' +
+        '<button class="btn btn-sm btn-del" onclick="deleteNote(' + n.id + ')">Delete</button>' +
+      '</div>' +
+    '</div>'
+  ).join('');
+}
+
 // ── rates ─────────────────────────────────────────────────────────
 async function updateRates() {
   rates.SGDtoJPY = parseFloat(document.getElementById('rateSGDtoJPY').value) || 113;
@@ -526,9 +618,11 @@ async function clearAll() {
 
 // ── init ──────────────────────────────────────────────────────────
 document.getElementById('date').value         = new Date().toISOString().slice(0,10);
+document.getElementById('noteDate').value      = new Date().toISOString().slice(0,10);
 document.getElementById('rateSGDtoJPY').value = rates.SGDtoJPY;
 document.getElementById('rateSGDtoMYR').value = rates.SGDtoMYR;
 loadData();
 </script>
+
 </body>
 </html>
